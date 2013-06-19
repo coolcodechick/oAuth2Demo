@@ -118,3 +118,7 @@ Contact
 -------
 
 Please see Brent Shaffer @ bshaffer's Git Hub account for the orignianl code information
+
+MY Notes
+--------
+I had to add the scope column to the oauth_users table for the User Credential Grant to accept the flow passed in the request

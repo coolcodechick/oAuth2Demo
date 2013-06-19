@@ -41,7 +41,7 @@
         <a class="button" href="{{  url(app.parameters.implicit_route) }}?response_type=token&client_id={{app.parameters.client_id|url_encode()}}&redirect_uri={{ 'http://localhost:8888/oauth2-server-demo/web/'|url_encode() }}&state={{session_id}}">Implicit Grant</a>
     {% endif%}
     {% if app.parameters.user_route is defined %}       
-        <a class="button" href="{{ app.parameters.user_route|slice(0, 4) == 'http' ? app.parameters.user_route : url(app.parameters.user_route)  }}?redirect_uri={{ url('request_token')|url_encode() }}&client_id={{app.parameters.client_id|url_encode()}}&client_secret={{ app.parameters.client_secret }}&state={{session_id}}&username=username&password=password">User Credentials</a>
+        <a class="button" href="{{ app.parameters.user_route|slice(0, 4) == 'http' ? app.parameters.user_route : url(app.parameters.user_route)  }}?redirect_uri={{ url('request_token')|url_encode() }}&state={{session_id}}&username={{ app.parameters.username }}&password={{ app.parameters.password }}&scope={{app.parameters.scope}}">User Credentials</a>
     {% endif%}
         <br />
         <br />

@@ -1,10 +1,8 @@
 <IfModule mod_rewrite.c>
     Options -MultiViews
-
     RewriteEngine On
 #    RewriteBase /web/
-	RewriteBase /oauth2-server-demo/web/
-		
+    RewriteBase /oauth2-server-demo/web/
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
