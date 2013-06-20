@@ -10,5 +10,11 @@
             "OAuth2Demo": "src/"
         }
     },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "1.5.0RC2"
+    },
+	
     "minimum-stability": "dev"
+	
+
 }

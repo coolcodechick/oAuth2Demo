@@ -5,9 +5,9 @@ namespace OAuth2Demo\Server;
 use Silex\Application;
 use Silex\ControllerProviderInterface;
 use OAuth2\HttpFoundationBridge\Server as OAuth2_HttpFoundationServer;
-
-use OAuth2_Storage_Memory; //added for scope
-use OAuth2_Scope;   //added for scope
+ //added for scope
+use OAuth2_Storage_Memory;
+use OAuth2_Scope;
 
 class Server implements ControllerProviderInterface
 {
@@ -24,23 +24,25 @@ class Server implements ControllerProviderInterface
 
         // create PDO-based sqlite storage
         //$storage = new \OAuth2_Storage_Pdo(array('dsn' => 'sqlite:'.$sqliteFile));
-        // Switch storage to a MySQL Database        
+        // Switch storage to a MySQL Database
         $storage = new \OAuth2_Storage_Pdo(array('dsn' => 'mysql:host=localhost;dbname=oauth2_server_php', 'username' => 'root', 'password' => 'root'));
 
-        // use HttpFountation Server, which returns a silex-compatible request object (https://github.com/bshaffer/oauth2-server-httpfoundation-bridge)
+        // use HttpFountation Server, which returns a silex-compatible request object
+        // (https://github.com/bshaffer/oauth2-server-httpfoundation-bridge)
         // To override the default settings for the configurations pass them as an array in the second param
-        $server = new OAuth2_HttpFoundationServer($storage, array('enforce_state' => false , 'allow_implicit' => true, 'access_lifetime' => 30 /*3600*/, 'refresh_token_lifetime' => 75 /*1209600*/) );  
+        $server = new OAuth2_HttpFoundationServer($storage, array('enforce_state' => false , 'allow_implicit' => true, 'access_lifetime' => 30 /*3600*/, 'refresh_token_lifetime' => 75 /*1209600*/));
 
         // we only need "AuthorizationCode" grant type for this demo (we should show off all grant types eventually!)
         $grantType = new \OAuth2_GrantType_AuthorizationCode($storage);
         $server->addGrantType($grantType);
-       
-        // Add additional grant types   
+
+        // Add additional grant types
         $server->addGrantType(new \OAuth2_GrantType_ClientCredentials($storage));
     
-        $config = array('always_issue_new_refresh_token' => false);  //False is default set to true to receive refresh token every time
+        //False is default set to true to receive refresh token every time
+        $config = array('always_issue_new_refresh_token' => false);
         $server->addGrantType(new \OAuth2_GrantType_RefreshToken($storage, $config));
-   
+
         $server->addGrantType(new \OAuth2_GrantType_UserCredentials($storage));
 
         // Set up the scopes available
@@ -51,15 +53,18 @@ class Server implements ControllerProviderInterface
             'friends'
         );
 
-        $memory = new OAuth2_Storage_Memory(array(
-            'default_scope' => $defaultScope,
-            'supported_scopes' => $supportedScopes
-        ));
+        $memory = new OAuth2_Storage_Memory(
+            array(
+                'default_scope' => $defaultScope,
+                'supported_scopes' => $supportedScopes
+            )
+        );
         $scopeUtil = new OAuth2_Scope($memory);
 
         $server->setScopeUtil($scopeUtil);
 
-        // add the server to the silex "container" so we can use it in our controllers (see src/OAuth2Demo/Server/Controllers/.*)
+        // add the server to the silex "container" so we can use it in our controllers
+        // (see src/OAuth2Demo/Server/Controllers/.*)
         $app['oauth_server'] = $server;
     }
 

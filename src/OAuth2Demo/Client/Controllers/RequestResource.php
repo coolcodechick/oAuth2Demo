@@ -11,7 +11,7 @@ class RequestResource
      * Connects the routes in Silex 
      * @param type $routing
      */
-    static public function addRoutes($routing)
+    public static function addRoutes($routing)
     {
         $routing->get('/client/request_resource', array(new self(), 'requestResource'))->bind('request_resource');
         $routing->get('/client/request_resource/{slug}', array(new self(), 'requestResource'))->bind('request_resource/slug');
@@ -29,13 +29,13 @@ class RequestResource
         $session = $app['session'];         // the session (or user) object
         
         // Use the refresh_token to retrive a new Access Token
-        if( $session->get('refresh_token')){
+        if ($session->get('refresh_token')) {
             $refreshed_token = RefreshToken::requestRefreshToken($app);
-            if(isset($refreshed_token['access_token'])) {
+            if (isset($refreshed_token['access_token'])) {
                 return $refreshed_token['access_token'];
             } else {
                 return "error";
-            }                 
+            }
         }
     }
 
@@ -60,10 +60,8 @@ class RequestResource
         // Make the resource request with the include= in the request body
         $config['resource_params']['include'] = $slug;
         
-        // Get the resource_route from the config file
+        // Get the resource_route from the config file and set endpoint for the request
         $route = $config['resource_route'];
-
-        // Set endpoint for the request
         $endpoint = 0 === strpos($route, 'http') ? $route : $urlgen->generate($route, array(), true);
 
         // Make the resource request via curl and decode the json response
@@ -72,20 +70,20 @@ class RequestResource
 
         // Check the state
         if ($app['request']->get('state') !== $session->getId()) {
-           return $twig->render('client/failed_authorization.twig', array('response' => array('error_description' => 'Your session has expired.  Please try again.')));
+            return $twig->render('client/failed_authorization.twig', array('response' => array('error_description' => 'Your session has expired.  Please try again.')));
         }
         
         // Check if the access token is expired
-        if (isset( $json['error_description']) && $json['error_description'] === 'The access token provided has expired' ){
+        if (isset($json['error_description']) && $json['error_description'] === 'The access token provided has expired') {
             // Try to renew the access token with the refresh token
             $refreshed_token = $this->renewAccessToken($app);
-            if($refreshed_token != "error") {
+            if ($refreshed_token != "error") {
                 // Redirect to send the request for the resource again
-                return $app->redirect($app['url_generator']->generate('request_resource', array( 'token' => $refreshed_token, 'state' => $session->getId() ) ) );
+                return $app->redirect($app['url_generator']->generate('request_resource', array('token' => $refreshed_token, 'state' => $session->getId())));
             } else {
                 // Render the page with the original error that the access token expired
                 return $twig->render('client/show_resource.twig', array('response' => $json ? $json : $response, 'token' => $token, 'endpoint' => $endpoint, 'session_id' => $session->getId()));
-            }                 
+            }
         } else {
             return $twig->render('client/show_resource.twig', array('response' => $json ? $json : $response, 'token' => $token, 'endpoint' => $endpoint, 'session_id' => $session->getId()));
         }

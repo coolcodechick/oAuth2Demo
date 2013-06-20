@@ -1,6 +1,7 @@
 <?php
 
 namespace OAuth2Demo\Shared;
+
 /**
  * Class used to make curl requests
  */
@@ -18,14 +19,17 @@ class Curl
      */
     public function __construct($options = array())
     {
-        $this->options = array_merge(array(
-            'debug'      => false,
-            'http_port'  => '80',
-            'user_agent' => 'PHP-curl-client (https://github.com/bshaffer/oauth2-server-demo)',
-            'timeout'    => 5,
-            'curlopts'   => null,
-            'verifyssl'  => true,
-        ), $options);
+        $this->options = array_merge(
+            array(
+                'debug'      => false,
+                'http_port'  => '80',
+                'user_agent' => 'PHP-curl-client (https://github.com/bshaffer/oauth2-server-demo)',
+                'timeout'    => 5,
+                'curlopts'   => null,
+                'verifyssl'  => true,
+            ),
+            $options
+        );
     }
 
     /**
@@ -48,23 +52,19 @@ class Curl
             $curlOptions += array(
                 CURLOPT_POST  => true,
             );
-        }
-        elseif ('PUT' === $httpMethod) {
+        } elseif ('PUT' === $httpMethod) {
             $curlOptions += array(
                 CURLOPT_POST  => true, // This is so cURL doesn't strip CURLOPT_POSTFIELDS
                 CURLOPT_CUSTOMREQUEST => 'PUT',
             );
-        }
-        elseif ('DELETE' === $httpMethod) {
+        } elseif ('DELETE' === $httpMethod) {
             $curlOptions += array(
                 CURLOPT_CUSTOMREQUEST => 'DELETE',
             );
         }
 
-        if (!empty($parameters))
-        {
-            if('GET' === $httpMethod)
-            {
+        if (!empty($parameters)) {
+            if ('GET' === $httpMethod) {
                 $queryString = utf8_encode($this->buildQuery($parameters));
                 $url .= '?' . $queryString;
             } elseif ('POST' === $httpMethod) {
@@ -156,8 +156,7 @@ class Curl
 
     protected function debug($message)
     {
-        if($this->options['debug'])
-        {
+        if ($this->options['debug']) {
             print $message."\n";
         }
     }

@@ -11,7 +11,7 @@ class Resource
      * Connects the routes in Silex
      * @param type $routing
      */
-    static public function addRoutes($routing)
+    public static function addRoutes($routing)
     {
         $routing->get('/apiResource', array(new self(), 'resource'))->bind('access');
     }
@@ -47,34 +47,36 @@ class Resource
                 )
             );
       
-            // Check which includes are included, verify the token has access to the scope, get those resources, and merge to api_response
-            if (strstr($include, 'basic')){
+            // Check which includes are included, verify the token has access to the scope,
+            // get those resources, and merge to api_response
+            if (strstr($include, 'basic')) {
                 $scopeRequired = 'basic'; // this resource requires "friends" scope
                 if (!$server->verifyResourceRequest($app['request'], $scopeRequired)) {
-                    // if the scope required is different from what the token allows, this will send a "401 insufficient_scope" error
+                    // if the scope required is different from what the token allows,
+                    // this will send a "401 insufficient_scope" error
                     return $server->getResponse();
                 } else {
-                        $basic_profile = $this->getBasicInformation($app);
+                        $basic_profile = $this->getBasicInformation();
                         $api_response = array_merge($api_response, $basic_profile);
                 }
-            } 
-            if (strstr($include, 'profile')){
+            }
+            if (strstr($include, 'profile')) {
                 $scopeRequired = 'profile';             // this resource requires "profile" scope
         
                 if (!$server->verifyResourceRequest($app['request'], $scopeRequired)) {
                     return $server->getResponse();
                 } else {
-                    $profile = $this->getFullProfile($app);
+                    $profile = $this->getFullProfile();
                     $api_response = array_merge($api_response, $profile);
                 }
-            } 
+            }
             if (strstr($include, 'friends')) {
                 $scopeRequired = 'friends'; // this resource requires "friends" scope
                 if (!$server->verifyResourceRequest($app['request'], $scopeRequired)) {
                     return $server->getResponse();
                 } else {
-                    $friends = $this->getFriendsDetails($app);
-                    $api_response = array_merge($api_response, $friends);    
+                    $friends = $this->getFriendsDetails();
+                    $api_response = array_merge($api_response, $friends);
                 }
             }
             return new Response(json_encode($api_response));
@@ -87,7 +89,7 @@ class Resource
      * @param \Silex\Application $app
      * @return array
      */
-    public function getBasicInformation(Application $app)
+    public function getBasicInformation()
     {
         $api_response = array(
             'profile' => array (
@@ -118,8 +120,8 @@ class Resource
      * @param \Silex\Application $app
      * @return array
      */
-    public function getFullProfile(Application $app)
-    {    
+    public function getFullProfile()
+    {
         $api_response = array(
             'profile' => array (
                 'firstName' => 'Tanya',
@@ -143,7 +145,7 @@ class Resource
      * @param \Silex\Application $app
      * @return array
      */
-    public function getFriendsDetails(Application $app)
+    public function getFriendsDetails()
     {
         $api_response = array(
             'friends' => array(

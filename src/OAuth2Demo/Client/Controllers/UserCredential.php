@@ -24,15 +24,15 @@ use OAuth2Demo\Shared\Curl;
  * 
  * @author tanya brodsky
  */
-class UserCredential {
-    
+class UserCredential
+{
     /**
      * Connects the routes in Silex
      * @param type $routing
      */
-    static public function addRoutes($routing)
+    public static function addRoutes($routing)
     {
-        $routing->get('/user_grant', array(new self(), 'userGrant'))->bind('user_grant');  //per documentation should be a get request not a post but this breaks the classes
+        $routing->get('/user_grant', array(new self(), 'userGrant'))->bind('user_grant');
     }
     
     /**
@@ -54,28 +54,31 @@ class UserCredential {
         }
 
         // Set endpoint for request
-        $endpoint = 0 === strpos($config['user_grant'], 'http') ? $config['user_grant'] : $urlgen->generate($config['user_grant'], array(), true);
+        $route = $config['user_grant'];
+        $endpoint = 0 === strpos($route, 'http') ? $route : $urlgen->generate($route, array(), true);
         
         $query = array(
             'grant_type'    => 'password',
-               
             'username'      => $app['request']->get('username'),    // Pulling from url for example here
-            'password'      => $app['request']->get('password'),  
+            'password'      => $app['request']->get('password'),
         );
         
         // Check for optional params and add to query if set
-        $app['request']->get('scope')   ? $query['scope'] = $app['request']->get('scope')   : '';
+        $app['request']->get('scope') ? $query['scope'] = $app['request']->get('scope') : '';
      
         // Configure options to use the Authorization Header to pass the client_id and client_secret
-        $options = array_merge(array(
-            'auth' => true,
-            'client_id'     => $config['client_id'],       //pulls from client configuration file
-            'client_secret' => $config['client_secret'],
-        ), $config['curl_options']);
+        $options = array_merge(
+            array(
+                'auth' => true,
+                'client_id'     => $config['client_id'],       //pulls from client configuration file
+                'client_secret' => $config['client_secret'],
+            ),
+            $config['curl_options']
+        );
       
         // make the token request via curl and decode the json response
         $response = $curl->request($endpoint, $query, 'POST', $options);
-        $json = json_decode($response['response'], TRUE);
+        $json = json_decode($response['response'], true);
             
         // Return a successful response
         if (isset($json['access_token'])) {
@@ -86,5 +89,3 @@ class UserCredential {
         return $twig->render('client/failed_token_request.twig', array('response' => $json ? $json : $response));
     }
 }
-
-?>

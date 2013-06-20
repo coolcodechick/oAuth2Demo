@@ -6,3 +6,4 @@ autoload.php
 data/oauth.sqlite
 data/parameters.json
 /nbproject/private/
+Rakefile

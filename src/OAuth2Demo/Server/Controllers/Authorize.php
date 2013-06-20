@@ -4,7 +4,6 @@ namespace OAuth2Demo\Server\Controllers;
 
 use Silex\Application;
 
-
 class Authorize
 {
     
@@ -12,7 +11,7 @@ class Authorize
      * Connects the routes in Silex
      * @param type $routing
      */
-    static public function addRoutes($routing)
+    public static function addRoutes($routing)
     {
         $routing->get('/authorize', array(new self(), 'authorize'))->bind('authorize');
         $routing->post('/authorize', array(new self(), 'authorizeFormSubmit'))->bind('authorize_post');

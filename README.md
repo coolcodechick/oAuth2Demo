@@ -117,8 +117,8 @@ This will provide a dropdown at the top which will allow you to switch environme
 Contact
 -------
 
-Please see Brent Shaffer @ bshaffer's Git Hub account for the orignianl code information
+Please see Brent Shaffer @ bshaffer's Git Hub account for the original code information.
 
 MY Notes
 --------
-I had to add the scope column to the oauth_users table for the User Credential Grant to accept the flow passed in the request
+I had to add the scope column to the oauth_users table for the User Credential Grant to accept the flow passed in the request.
