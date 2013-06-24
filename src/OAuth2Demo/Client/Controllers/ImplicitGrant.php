@@ -65,7 +65,7 @@ class ImplicitGrant
         $app['request']->get('redircet_uri') ? $query .= '&redirect_uri='.$app['request']->get('redircet_uri') : '';
         $app['request']->get('scope')        ? $query .= '&scope='.$app['request']->get('scope')               : '';
         $app['request']->get('state')        ? $query .= '&state='.$app['request']->get('state')               : '';
-        
+    
         // Send the request
         return $app->redirect($endpoint.'?'.$query);
     }

@@ -54,7 +54,7 @@ class UserCredential
         }
 
         // Set endpoint for request
-        $route = $config['user_grant'];
+        $route = $config['token_route'];
         $endpoint = 0 === strpos($route, 'http') ? $route : $urlgen->generate($route, array(), true);
         
         $query = array(
