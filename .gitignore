@@ -4,5 +4,4 @@ composer.phar
 autoload.php
 data/oauth.sqlite
 data/parameters.json
-/nbproject/
 Rakefile
