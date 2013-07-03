@@ -36,7 +36,7 @@
                 {
                     "name": "Brent Shaffer",
                     "email": "bshafs@gmail.com",
-                    "homepage": "http://brentertainment.com"
+                    "homepage": "http://github.com/bshaffer"
                 }
             ],
             "description": "A bridge to HttpFoundation for oauth2-server-php",
@@ -182,12 +182,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fabpot/Silex.git",
-                "reference": "c2148890c317a1ae96dfd916655af677a270d87b"
+                "reference": "5755194c690c587cc3d1fe349c74e138f9ca9a94"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Silex/zipball/c2148890c317a1ae96dfd916655af677a270d87b",
-                "reference": "c2148890c317a1ae96dfd916655af677a270d87b",
+                "url": "https://api.github.com/repos/fabpot/Silex/zipball/5755194c690c587cc3d1fe349c74e138f9ca9a94",
+                "reference": "5755194c690c587cc3d1fe349c74e138f9ca9a94",
                 "shasum": ""
             },
             "require": {
@@ -200,7 +200,7 @@
             },
             "require-dev": {
                 "doctrine/dbal": ">=2.2.0,<2.4.0-dev",
-                "monolog/monolog": ">=1.4,<2.0,>=1.4.1",
+                "monolog/monolog": "~1.4,>=1.4.1",
                 "swiftmailer/swiftmailer": "5.*",
                 "symfony/browser-kit": ">=2.3,<2.4-dev",
                 "symfony/config": ">=2.3,<2.4-dev",
@@ -256,7 +256,7 @@
             "keywords": [
                 "microframework"
             ],
-            "time": "2013-05-25 15:27:30"
+            "time": "2013-07-03 07:17:00"
         },
         {
             "name": "symfony/debug",
@@ -265,20 +265,20 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Debug.git",
-                "reference": "bcf326c347d9e2ccafde5e30fb938e09255f6c1a"
+                "reference": "6071c5175febcd535dc56d4932a74707fa8a84cc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Debug/zipball/bcf326c347d9e2ccafde5e30fb938e09255f6c1a",
-                "reference": "bcf326c347d9e2ccafde5e30fb938e09255f6c1a",
+                "url": "https://api.github.com/repos/symfony/Debug/zipball/6071c5175febcd535dc56d4932a74707fa8a84cc",
+                "reference": "6071c5175febcd535dc56d4932a74707fa8a84cc",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
             "require-dev": {
-                "symfony/http-foundation": ">=2.1,<3.0",
-                "symfony/http-kernel": ">=2.1,<3.0"
+                "symfony/http-foundation": "~2.1",
+                "symfony/http-kernel": "~2.1"
             },
             "suggest": {
                 "symfony/class-loader": "",
@@ -312,7 +312,7 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "http://symfony.com",
-            "time": "2013-06-02 12:05:59"
+            "time": "2013-06-25 13:33:52"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -375,12 +375,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/HttpFoundation.git",
-                "reference": "v2.3.1"
+                "reference": "2ee5c0da197451c0b297908d1337c944166bcd72"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/HttpFoundation/zipball/v2.3.1",
-                "reference": "v2.3.1",
+                "url": "https://api.github.com/repos/symfony/HttpFoundation/zipball/2ee5c0da197451c0b297908d1337c944166bcd72",
+                "reference": "2ee5c0da197451c0b297908d1337c944166bcd72",
                 "shasum": ""
             },
             "require": {
@@ -416,7 +416,7 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "http://symfony.com",
-            "time": "2013-05-10 06:00:03"
+            "time": "2013-07-01 12:24:43"
         },
         {
             "name": "symfony/http-kernel",
@@ -495,22 +495,22 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Routing.git",
-                "reference": "v2.3.1"
+                "reference": "3deda53b19ee9d361b03de5268bc91533eb76235"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Routing/zipball/v2.3.1",
-                "reference": "v2.3.1",
+                "url": "https://api.github.com/repos/symfony/Routing/zipball/3deda53b19ee9d361b03de5268bc91533eb76235",
+                "reference": "3deda53b19ee9d361b03de5268bc91533eb76235",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
             "require-dev": {
-                "doctrine/common": ">=2.2,<3.0",
-                "psr/log": ">=1.0,<2.0",
-                "symfony/config": ">=2.2,<3.0",
-                "symfony/yaml": ">=2.0,<3.0"
+                "doctrine/common": "~2.2",
+                "psr/log": "~1.0",
+                "symfony/config": "~2.2",
+                "symfony/yaml": "~2.0"
             },
             "suggest": {
                 "doctrine/common": "",
@@ -544,7 +544,7 @@
             ],
             "description": "Symfony Routing Component",
             "homepage": "http://symfony.com",
-            "time": "2013-05-20 08:57:26"
+            "time": "2013-06-23 08:16:02"
         },
         {
             "name": "symfony/twig-bridge",
@@ -611,12 +611,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fabpot/Twig.git",
-                "reference": "6f753205834b511269a97fe35108bbd5c8d245f5"
+                "reference": "6f0753f0ff4047a870f57e7567446242b38b37ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Twig/zipball/6f753205834b511269a97fe35108bbd5c8d245f5",
-                "reference": "6f753205834b511269a97fe35108bbd5c8d245f5",
+                "url": "https://api.github.com/repos/fabpot/Twig/zipball/6f0753f0ff4047a870f57e7567446242b38b37ac",
+                "reference": "6f0753f0ff4047a870f57e7567446242b38b37ac",
                 "shasum": ""
             },
             "require": {
@@ -635,7 +635,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "BSD-3"
+                "BSD-3-Clause"
             ],
             "authors": [
                 {
@@ -652,7 +652,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2013-06-09 06:03:21"
+            "time": "2013-06-27 06:24:36"
         }
     ],
     "packages-dev": [
